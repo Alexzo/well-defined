@@ -8,7 +8,10 @@ def g(w):
 w0 = array([1,1])
 w0.shape=(2,1)
 print(g(w0))
-
+w1 = array([1,1])
+w1.shape=(2,1)
+w=dot(w1,w1.T)
+print(w+1)
 def make_function():
     global fig,ax1
 
@@ -55,7 +58,8 @@ def gradient_descent(w0):
     max_its = 10
     while iter < max_its:
         # take gradient step
-        grad= dot(pinv((2.0*exp(dot(w.T, w))*(2*dot(w.T, w)+exp(dot(w, w.T))+1.0))/((1+exp(dot(w.T, w)))**2)),(2.0*exp(dot(w.T, w))*w)/(1.0+exp(dot(w.T, w))))
+        grad= dot(pinv((2.0*exp(dot(w.T, w))*(2*dot(w, w.T)+(exp(dot(w.T, w))+1.0)*identity(2)))/((1+exp(dot(w.T, w)))**2)),(2.0*exp(dot(w.T, w))*w)/(1.0+exp(dot(w.T, w))))
+        print(grad)
         w = w - grad
 
         # update path containers
@@ -69,7 +73,7 @@ def gradient_descent(w0):
 k=linspace(0,10,10)
 cost=gradient_descent(w0)
 costh=[item[0][0] for item in cost]
-
+print(costh)
 fig,ax =subplots(1,1,figsize=(6,6))
 ax.plot(k, costh)
 show()
